@@ -38,33 +38,43 @@
         </div>
       </div>
 
-      <!-- 사진 들어갈 영역 -->
-      <div class="hero-photo">
-        <!-- 나중에 여기에 실제 이미지 넣으면 됨 -->
-        <div class="hero-photo-placeholder">
-          앞으로 들어갈 인테리어 사진 영역입니다.<br />
-          배경 이미지만 교체해서 사용하세요.
-        </div>
-        <div class="hero-photo-note">
-          예: 거실 전경 사진, 카페 전경 사진 등
-        </div>
-      </div>
+      <!-- 슬라이드 전체 컨테이너 -->
+	  <div class="hero-slider">
+		  <div class="slide active" style="background-image: url('resource/img/slide1.jpg');"></div>
+		  <div class="slide" style="background-image: url('resource/img/slide2.jpg');"></div>
+		  <div class="slide" style="background-image: url('resource/img/slide3.png');"></div>
+		
+		  <!-- 양쪽 네비 버튼 -->
+		  <button class="slide-btn prev">‹</button>
+		  <button class="slide-btn next">›</button>
+	  </div>
+	  
     </section>
 
-    <!-- 소개 -->
-    <section id="about">
-      <h2>우리만의 인테리어 철학</h2>
-      <p class="section-desc">
-        평범한 시공 범위(Normal) 안에서 가능한 최고 완성도(Upper Limit)를 추구합니다.
-      </p>
-      <p style="font-size:14px;color:#555;max-width:640px;">
-        우리는 공간의 기본 예산을 존중합니다. <br>
-		하지만 그 안에서 얻을 수 있는 최상의 미감과 완성도를 놓치지 않습니다.<br>
-		ULN 은 평범함의 상한선을 끌어올리는 우리의 방식입니다.<br>
-		작은 디테일도, 보이지 않는 부분도
-		상위 기준으로 설계하고 시공합니다.
-      </p>
-    </section>
+	<!-- 소개 -->
+	<section id="about" class="about-section">
+	  <div class="about-grid">
+	    <div class="about-logo-box">
+			<img src="resource/img/logo.png" alt="Logo">	
+	    </div>
+	
+	    <!-- RIGHT : TEXT -->
+	    <div class="about-text">
+	      <h2>우리만의 인테리어 철학</h2>
+	      <p class="section-desc">
+	        평범한 시공 범위(Normal) 안에서 가능한 최고 완성도(Upper Limit)를 추구합니다.
+	      </p>
+	      <p class="about-body-text">
+	         우리는 공간의 기본 예산을 존중합니다. <br>
+			 하지만 그 안에서 얻을 수 있는 최상의 미감과 완성도를 놓치지 않습니다.<br>
+			 ULN 은 평범함의 상한선을 끌어올리는 우리의 방식입니다.<br>
+			 작은 디테일도, 보이지 않는 부분도
+			 상위 기준으로 설계하고 시공합니다.
+	      </p>
+	    </div>
+	
+	  </div>
+	</section>
 
     <!-- 서비스 -->
     <section id="services">
@@ -128,3 +138,29 @@
   </footer>
 </body>
 </html>
+
+<script>
+  let currentSlide = 0;
+  const slides = document.querySelectorAll(".hero-slider .slide");
+
+  function showSlide(index) {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle("active", i === index);
+    });
+    currentSlide = index;
+  }
+
+  // 다음, 이전 버튼
+  document.querySelector(".slide-btn.next").onclick = () => {
+    showSlide((currentSlide + 1) % slides.length);
+  };
+
+  document.querySelector(".slide-btn.prev").onclick = () => {
+    showSlide((currentSlide - 1 + slides.length) % slides.length);
+  };
+
+  // 4초마다 자동 슬라이드
+  setInterval(() => {
+    showSlide((currentSlide + 1) % slides.length);
+  }, 4000);
+</script>
